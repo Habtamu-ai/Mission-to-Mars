@@ -7,33 +7,32 @@ from webdriver_manager.chrome import ChromeDriverManager
 executable_path = {'executable_path': ChromeDriverManager().install()}
 browser = Browser('chrome', **executable_path, headless=False)
 
-# Visit the mars nasa news site
-url = 'https://redplanetscience.com'
-browser.visit(url)
+def mars_news(browser):
 
-# Optional delay for loading the page
-browser.is_element_present_by_css('div.list_text', wait_time=1)
+    # Scrape Mars News
+    # Visit the mars nasa news site
+    url = 'https://redplanetscience.com/'
+    browser.visit(url)
 
-# Conver the browser html to a soup object
-html = browser.html
-news_soup = soup(html, 'html.parser')
+    # Optional delay for loading the page
+    browser.is_element_present_by_css('div.list_text', wait_time=1)
 
-slide_elem = news_soup.select_one('div.list_text')
-slide_elem.find('div', class_='content_title')
+    # Convert the browser html to a soup object and then quit the browser
+    html = browser.html
+    news_soup = soup(html, 'html.parser')
 
-# Use the parent element to find the first `a` tag and save it as `news_title`
-news_title = slide_elem.find('div', class_='content_title').get_text()
-news_title
-#Article summary,by just updating the item in class
-article_summary = slide_elem.find('div', class_='article_teaser_body').get_text()
-article_summary
-#The date the article was published just by ubdating the class element
-publishing_date=slide_elem.find('div',class_='list_date').get_text()
-publishing_date
+    # Add try/except for error handling
+    try:
+        slide_elem = news_soup.select_one('div.list_text')
+        # Use the parent element to find the first 'a' tag and save it as 'news_title'
+        news_title = slide_elem.find('div', class_='content_title').get_text()
+        # Use the parent element to find the paragraph text
+        news_p = slide_elem.find('div', class_='article_teaser_body').get_text()
 
-# Use the parent element to find the paragraph text
-news_p = slide_elem.find('div', class_='article_teaser_body').get_text()
-news_p
+    except AttributeError:
+        return None, None
+
+    return news_title, news_p
 
 # ### Featured Images
 
