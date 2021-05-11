@@ -20,9 +20,9 @@ def scrape_all():
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
         "last_modified": dt.datetime.now(),
-        "images": mars_images(browser),
-        "scrape_hemisphere": scrape_hemisphere(html_text),
-        "hemisphere_image_urls": hemisphere_image_urls(browser)
+        #"images": mars_images(browser),
+        #"scrape_hemisphere": scrape_hemisphere(html_text),
+        "hemispheres": hemispheres(browser)
     }
 
     # Stop webdriver and return data
@@ -99,12 +99,15 @@ def mars_facts():
 
     # Convert dataframe into HTML format, add bootstrap
     return df.to_html(classes="table table-striped")
-def hemisphere_image_urls(browser):
+
+def hemispheres(browser):
     # Use browser to visit the URL 
-    url = 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/index.html'
+    #url = 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/index.html'
+    url = "https://marshemispheres.com/index.html"
     browser.visit(url)
     # Optional delay for loading the page
     browser.is_element_present_by_css('div.list_text', wait_time=1)
+
     hemisphere_image_urls = []
     links = browser.find_by_css('a.product-item img')
 
@@ -122,20 +125,22 @@ def hemisphere_image_urls(browser):
         # Navigate backwards
         browser.back()
     return hemisphere_image_urls
-def images(browser):
-    try:
-        url = 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/index.html'
-    except:
-        hemisphere_image_urls = [{'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/full.jpg',
-      'title': 'Cerberus Hemisphere Enhanced'},
-     {'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/schiaparelli_enhanced-full.jpg',
-      'title': 'Schiaparelli Hemisphere Enhanced'},
-     {'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/syrtis_major_enhanced-full.jpg',
-      'title': 'Syrtis Major Hemisphere Enhanced'},
-     {'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/valles_marineris_enhanced-full.jpg',
-      'title': 'Valles Marineris Hemisphere Enhanced'}]
-    return hemisphere_image_urls
+
+#def images(browser):
+#    try:
+#        url = 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/index.html'
+#    except:
+#        hemisphere_image_urls = [{'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/full.jpg',
+#      'title': 'Cerberus Hemisphere Enhanced'},
+#     {'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/schiaparelli_enhanced-full.jpg',
+#      'title': 'Schiaparelli Hemisphere Enhanced'},
+#     {'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/syrtis_major_enhanced-full.jpg',
+#      'title': 'Syrtis Major Hemisphere Enhanced'},
+#     {'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/valles_marineris_enhanced-full.jpg',
+#      'title': 'Valles Marineris Hemisphere Enhanced'}]
+#    return hemisphere_image_urls
     ##
+
 def scrape_hemisphere(html_text):
     souph = soup(html_text, "html.parser")
     try:
