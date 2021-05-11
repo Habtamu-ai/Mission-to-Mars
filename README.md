@@ -11,7 +11,8 @@ The main purpose of this project is to build an interactive web app that can scr
  - In addition, the web app with Mars Hemisphere Images updates itself. Such as, the *scaraping.py* file is updated and retrieves all four images and titles, the *Mongodb* is updated to contain all full-resolution image URLs AND Titles, the index.html file contains code that displays, and the web app contains all the information.
  
  ![Body](https://user-images.githubusercontent.com/78656720/117829863-221ee300-b241-11eb-8426-466023cf4e88.png)
- - Finally the project adds  three Bootstrap components tha makes the web app  is reponsive to mobile and tablets.
+ 
+ - Finally the project adds  three Bootstrap components that makes the web app  is reponsive to mobile and tablets.
 ![Thumbnails](https://user-images.githubusercontent.com/78656720/117829929-306cff00-b241-11eb-8313-a9a062a8eb6d.png)
 
 ## Summary
