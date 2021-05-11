@@ -126,21 +126,6 @@ def hemispheres(browser):
         browser.back()
     return hemisphere_image_urls
 
-#def images(browser):
-#    try:
-#        url = 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/index.html'
-#    except:
-#        hemisphere_image_urls = [{'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/full.jpg',
-#      'title': 'Cerberus Hemisphere Enhanced'},
-#     {'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/schiaparelli_enhanced-full.jpg',
-#      'title': 'Schiaparelli Hemisphere Enhanced'},
-#     {'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/syrtis_major_enhanced-full.jpg',
-#      'title': 'Syrtis Major Hemisphere Enhanced'},
-#     {'img_url': 'https://data-class-mars-hemispheres.s3.amazonaws.com/Mars_Hemispheres/images/valles_marineris_enhanced-full.jpg',
-#      'title': 'Valles Marineris Hemisphere Enhanced'}]
-#    return hemisphere_image_urls
-    ##
-
 def scrape_hemisphere(html_text):
     souph = soup(html_text, "html.parser")
     try:
